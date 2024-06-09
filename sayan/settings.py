@@ -86,11 +86,11 @@ WSGI_APPLICATION = 'sayan.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'employees',  # The name of the database created in the script
-        'USER': 'your_db_user',  # Your MySQL username
-        'PASSWORD': 'your_db_password',  # Your MySQL password
-        'HOST': 'localhost',  # The address of the database server, usually 'localhost' for local development
-        'PORT': '3306',  # The port number MySQL is running on, typically 3306
+        'NAME': 'employees',  
+        'USER': 'Arash',  
+        'PASSWORD': 'Arash@13761376',  
+        'HOST': 'localhost',  
+        'PORT': '3306',  
     }
 }
 

@@ -1,16 +1,27 @@
-from django.shortcuts import render
-from rest_framework import generics
-from .models import Employee
-from .serializers import EmployeeSerializer
+from rest_framework import viewsets
+from .models import Employee, Department, DeptManager, DeptEmp, Title, Salary
+from .serializers import EmployeeSerializer, DepartmentSerializer, DeptManagerSerializer, DeptEmpSerializer, TitleSerializer, SalarySerializer
 
-
-class EmployeeListCreateView (generics.ListCreateAPIView) :
-    
+class EmployeeViewSet(viewsets.ModelViewSet):
     queryset = Employee.objects.all()
     serializer_class = EmployeeSerializer
 
+class DepartmentViewSet(viewsets.ModelViewSet):
+    queryset = Department.objects.all()
+    serializer_class = DepartmentSerializer
 
-class EmployeeDetailView (generics.RetrieveUpdateDestroyAPIView) :
+class DeptManagerViewSet(viewsets.ModelViewSet):
+    queryset = DeptManager.objects.all()
+    serializer_class = DeptManagerSerializer
 
-    queryset = Employee.objects.all()
-    serializer_class = EmployeeSerializer
+class DeptEmpViewSet(viewsets.ModelViewSet):
+    queryset = DeptEmp.objects.all()
+    serializer_class = DeptEmpSerializer
+
+class TitleViewSet(viewsets.ModelViewSet):
+    queryset = Title.objects.all()
+    serializer_class = TitleSerializer
+
+class SalaryViewSet(viewsets.ModelViewSet):
+    queryset = Salary.objects.all()
+    serializer_class = SalarySerializer
