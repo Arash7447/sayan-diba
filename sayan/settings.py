@@ -37,6 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'employees',
+    'departments',
 ]
 
 MIDDLEWARE = [
@@ -73,10 +76,21 @@ WSGI_APPLICATION = 'sayan.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'employees',  # The name of the database created in the script
+        'USER': 'your_db_user',  # Your MySQL username
+        'PASSWORD': 'your_db_password',  # Your MySQL password
+        'HOST': 'localhost',  # The address of the database server, usually 'localhost' for local development
+        'PORT': '3306',  # The port number MySQL is running on, typically 3306
     }
 }
 
