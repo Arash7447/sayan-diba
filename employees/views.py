@@ -2,7 +2,11 @@ from django.shortcuts import render
 from .search_indexes import EmployeeDocument
 from rest_framework import viewsets
 from .models import Employee, Department, DeptManager, DeptEmp, Title, Salary
-from .serializers import EmployeeSerializer, DepartmentSerializer, DeptManagerSerializer, DeptEmpSerializer, TitleSerializer, SalarySerializer
+from .serializers import (
+    EmployeeSerializer, DepartmentSerializer, DeptManagerSerializer,
+    DeptEmpSerializer, TitleSerializer, SalarySerializer
+)
+from django.shortcuts import render
 
 class EmployeeViewSet(viewsets.ModelViewSet):
     queryset = Employee.objects.all()
@@ -36,3 +40,7 @@ def search(request):
         employees = EmployeeDocument.search().all()
     
     return render(request, 'search_results.html', {'employees': employees})
+
+def employee_list(request):
+    employees = Employee.objects.select_related('department').all()
+    return render(request, 'employees/employee_list.html', {'employees': employees})

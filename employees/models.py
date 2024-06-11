@@ -14,26 +14,25 @@ class Employee(models.Model):
     last_name = models.CharField(max_length=16)
     gender = models.CharField(max_length=1, choices=[('M', 'Male'), ('F', 'Female')])
     hire_date = models.DateField()
-    department = models.ForeignKey(Department, on_delete=models.CASCADE)
-    salary = models.IntegerField()
+    salary = models.IntegerField(null=True, blank=True)
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
 
 class DeptManager(models.Model):
-    emp_no = models.ForeignKey(Employee, on_delete=models.CASCADE, related_name='managed_departments')
-    dept_no = models.ForeignKey(Department, on_delete=models.CASCADE, related_name='managers')
+    emp_no = models.ForeignKey(Employee, on_delete=models.CASCADE)
+    dept_no = models.ForeignKey(Department, on_delete=models.CASCADE)
     from_date = models.DateField()
     to_date = models.DateField()
 
 class DeptEmp(models.Model):
-    emp_no = models.ForeignKey(Employee, on_delete=models.CASCADE, related_name='departments')
-    dept_no = models.ForeignKey(Department, on_delete=models.CASCADE, related_name='employees')
+    emp_no = models.ForeignKey(Employee, on_delete=models.CASCADE)
+    dept_no = models.ForeignKey(Department, on_delete=models.CASCADE)
     from_date = models.DateField()
     to_date = models.DateField()
 
 class Title(models.Model):
-    emp_no = models.ForeignKey(Employee, on_delete=models.CASCADE, related_name='titles')
+    emp_no = models.ForeignKey(Employee, on_delete=models.CASCADE)
     title = models.CharField(max_length=50)
     from_date = models.DateField()
     to_date = models.DateField(null=True, blank=True)

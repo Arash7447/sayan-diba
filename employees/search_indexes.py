@@ -11,19 +11,22 @@ class EmployeeDocument(Document):
     class Index:
         name = 'employees'
         settings = {
-            'number_of_shards': 1,
-            'number_of_replicas': 0
+            "number_of_shards": 1,
+            "number_of_replicas": 0
         }
 
     class Django:
         model = Employee
         fields = [
-            'emp_no',
-            'birth_date',
             'first_name',
             'last_name',
-            'gender',
-            'hire_date',
             'salary',
         ]
         related_models = [Department]
+
+    def get_queryset(self):
+        return super(EmployeeDocument, self).get_queryset().select_related('department')
+
+    def get_instances_from_related(self, related_instance):
+        if isinstance(related_instance, Department):
+            return related_instance.employee_set.all()

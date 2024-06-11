@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e6f7ff; /* رنگ آبی پردازش شده */
+            color: #333; /* رنگ متن */
+            padding: 20px;
+        }
+        h1 {
+            color: #007bff; /* رنگ آبی روشن */
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #fff; /* پس زمینه سفید */
+            border: 1px solid #ddd; /* حاشیه کمی */
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Search Results</h1>
+    <ul>
+        {% for employee in employees %}
+        <li>{{ employee.first_name }} {{ employee.last_name }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
