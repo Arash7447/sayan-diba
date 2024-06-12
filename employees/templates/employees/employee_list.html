@@ -7,12 +7,12 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #e6f7ff; /* رنگ آبی پردازش شده */
-            color: #333; /* رنگ متن */
+            background-color: #e6f7ff;
+            color: #333;
             padding: 20px;
         }
         h1 {
-            color: #007bff; /* رنگ آبی روشن */
+            color: #007bff;
         }
         ul {
             list-style-type: none;
@@ -21,9 +21,38 @@
         li {
             margin-bottom: 10px;
             padding: 10px;
-            background-color: #fff; /* پس زمینه سفید */
-            border: 1px solid #ddd; /* حاشیه کمی */
+            background-color: #fff;
+            border: 1px solid #ddd;
             border-radius: 5px;
+        }
+        .pagination {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .pagination a {
+            margin: 0 5px;
+            padding: 5px 10px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .pagination a.active {
+            background-color: #0056b3;
+        }
+        .actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+        .actions button {
+            padding: 5px 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -31,8 +60,37 @@
     <h1>Employee List</h1>
     <ul>
         {% for employee in employees %}
-        <li>{{ employee.first_name }} {{ employee.last_name }} - {{ employee.department }}</li>
+        <li>
+            {{ employee.first_name }} {{ employee.last_name }}
+            <a href="{% url 'employee-detail-html' employee.pk %}">API</a>
+            <div class="actions">
+                <form action="{% url 'employee-update-html' employee.pk %}" method="get">
+                    <button type="submit">Update</button>
+                </form>
+                <form action="{% url 'employee-delete-html' employee.pk %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit">Delete</button>
+                </form>
+            </div>
+        </li>
         {% endfor %}
     </ul>
+    <div class="pagination">
+        {% if employees.has_previous %}
+            <a href="?page={{ employees.previous_page_number }}">Previous</a>
+        {% endif %}
+        
+        {% for page_num in employees.paginator.page_range %}
+            {% if employees.number == page_num %}
+                <a href="?page={{ page_num }}" class="active">{{ page_num }}</a>
+            {% else %}
+                <a href="?page={{ page_num }}">{{ page_num }}</a>
+            {% endif %}
+        {% endfor %}
+        
+        {% if employees.has_next %}
+            <a href="?page={{ employees.next_page_number }}">Next</a>
+        {% endif %}
+    </div>
 </body>
 </html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Detail</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e6f7ff;
+            color: #333;
+            padding: 20px;
+        }
+        h1 {
+            color: #007bff;
+        }
+        .details {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .actions {
+            margin-top: 10px;
+        }
+        .actions button {
+            padding: 5px 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Employee Detail</h1>
+    <div class="details">
+        <p><strong>Name:</strong> {{ employee.first_name }} {{ employee.last_name }}</p>
+        <p><strong>Birth Date:</strong> {{ employee.birth_date }}</p>
+        <p><strong>Gender:</strong> {{ employee.get_gender_display }}</p>
+        <p><strong>Hire Date:</strong> {{ employee.hire_date }}</p>
+    </div>
+    <div class="actions">
+        <form action="{% url 'employee-update-html' employee.pk %}" method="get">
+            <button type="submit">Update</button>
+        </form>
+        <form action="{% url 'employee-delete-html' employee.pk %}" method="post">
+            {% csrf_token %}
+            <button type="submit">Delete</button>
+        </form>
+    </div>
+</body>
+</html>
