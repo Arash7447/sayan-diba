@@ -38,5 +38,8 @@ def search(request):
     return render(request, 'search_results.html', {'employees': employees})
 
 def employee_list(request):
-    employees = Employee.objects.all()
+    employee_list = Employee.objects.all()
+    paginator = Paginator(employee_list, 10)  
+    page_number = request.GET.get('page')
+    employees = paginator.get_page(page_number)
     return render(request, 'employees/employee_list.html', {'employees': employees})
