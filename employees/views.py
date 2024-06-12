@@ -78,6 +78,7 @@ class EmployeeDeleteView(View):
         employee.delete()
         return redirect('employee-list')
 
+
 class EmployeeCreateView(View):
     def get(self, request):
         form = EmployeeForm()

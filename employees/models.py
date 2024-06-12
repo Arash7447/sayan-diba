@@ -20,3 +20,4 @@ class Employee(models.Model):
                 self.emp_no = 1
         super().save(*args, **kwargs)
 
+
