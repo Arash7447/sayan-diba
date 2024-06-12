@@ -58,11 +58,19 @@
 </head>
 <body>
     <h1>Employee List</h1>
+    <div class="actions">
+        <a href="{% url 'employee-create-html' %}" class="btn btn-primary" type="submit">Create New Employee</a>
+    </div>
     <ul>
         {% for employee in employees %}
         <li>
-            {{ employee.first_name }} {{ employee.last_name }}
-            <a href="{% url 'employee-detail-html' employee.pk %}">API</a>
+            <h3>{{ employee.first_name }} {{ employee.last_name }}</h3>
+            <p>Employee Number: {{ employee.emp_no }}</p>
+            <p>Birth Date: {{ employee.birth_date }}</p>
+            <p>Gender: {{ employee.get_gender_display }}</p>
+            <p>Hire Date: {{ employee.hire_date }}</p>
+            <!-- Add more details as needed -->
+            <a href="{% url 'employee-detail-html' employee.pk %}">Full View</a>
             <div class="actions">
                 <form action="{% url 'employee-update-html' employee.pk %}" method="get">
                     <button type="submit">Update</button>
@@ -83,8 +91,12 @@
         {% for page_num in employees.paginator.page_range %}
             {% if employees.number == page_num %}
                 <a href="?page={{ page_num }}" class="active">{{ page_num }}</a>
-            {% else %}
+            {% elif page_num > employees.number|add:'-3' and page_num < employees.number|add:'3' %}
                 <a href="?page={{ page_num }}">{{ page_num }}</a>
+            {% elif page_num == employees.paginator.num_pages %}
+                <a href="?page={{ page_num }}">{{ page_num }}</a>
+            {% elif page_num == employees.number|add:'-3' or page_num == employees.number|add:'3' %}
+                <span>...</span>
             {% endif %}
         {% endfor %}
         
@@ -93,4 +105,6 @@
         {% endif %}
     </div>
 </body>
+
+
 </html>
