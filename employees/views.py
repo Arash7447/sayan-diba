@@ -40,7 +40,7 @@ class SearchView(View):
 class EmployeeListView(View):
     def get(self, request):
         employee_objects = Employee.objects.all()
-        paginator = Paginator(employee_objects, 10)  
+        paginator = Paginator(employee_objects, 20)  
         page_number = request.GET.get('page')
         try:
             employees = paginator.get_page(page_number)

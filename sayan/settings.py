@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'employees',
-    'departments',
     'django_elasticsearch_dsl',
 ]
 
@@ -155,5 +154,5 @@ ELASTICSEARCH_CONNECTION = {
 
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 10,  # تعداد رکوردها در هر صفحه
+    'PAGE_SIZE': 10,  
 }
