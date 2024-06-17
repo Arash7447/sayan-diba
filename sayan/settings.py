@@ -144,8 +144,6 @@ ELASTICSEARCH_DSL = {
 
 
 
-
-
 ELASTICSEARCH_CONNECTION = {
     'hosts': ['https://localhost:9200'],
     'verify_certs': False,
